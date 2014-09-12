@@ -1,0 +1,32 @@
+{% extends 'nihonngo/framework.html' %}
+
+{% block title %}测试{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'nihonngo/js/exam.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+    <url id="getQuestionURL" value="{% url 'nihonngo:get_question' %}">
+    <url id="answerQUestionURL" value="{% url 'nihonngo:answer_question' %}">
+    <question qid=""></question>
+    <div class="horizontal kana-question">
+        <div style="float: left;">
+            <ul class="vertical left-list">
+                <li>请从下列假名注音中选出符合左侧生词的一项。</li>
+                <li class="separator"></li>
+            </ul>
+        </div>
+        <div style="float: right;">
+            <ul class="vertical right-list">
+                <li><a href="#" class="kannji"></a></li>
+                <li><a href="#" class="word-classes"></a></li>
+                <li><a href="#" class="familiarity"></a></li>
+                <li class="separator"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

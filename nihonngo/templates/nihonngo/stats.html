@@ -1,0 +1,23 @@
+{% extends 'nihonngo/framework.html' %}
+
+{% block title %}统计数据{% endblock %}
+
+{% block content %}
+<div class="default-container">
+    <div class="default-container-header">
+        <ul class="horizontal">
+            <li><a href="#">统计数据</a></li>
+        </ul>
+    </div>
+    <ul class="vertical">
+    {% for stat in statistics %}
+        <li>
+            <ul class="horizontal">
+                <li>{{stat.0}}</li>
+                <li>{{stat.1}}</li>
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

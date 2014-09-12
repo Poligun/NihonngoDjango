@@ -1,0 +1,61 @@
+{% extends 'nihonngo/framework.html' %}
+
+{% block title %}查询生词{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'nihonngo/js/edit.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="default-container">
+    <div class="default-container-header">
+        <ul class="horizontal">
+            <li><a href="#">查询结果</a></li>
+        </ul>
+    </div>
+    <url id="insertWordURL" value="{% url 'nihonngo:insert_word' %}">
+    {% if words %}
+        {% for word in words %}
+        <ul class="vertical edit-entry">
+            <li>
+                <ul class="horizontal">
+                    <li class="title"><a href="#">汉字</a></li>
+                    <li><input type="text" name="kannji" value="{{word.kannji}}"></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="horizontal">
+                    <li class="title"><a href="#">假名</a></li>
+                    <li><input type="text" name="kana" value="{{word.kana}}"></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="horizontal">
+                    <li class="title"><a href="#">词类</a></li>
+                    <li><input type="text" name="word-classes" value="{{word.word_classes|join:'，'}}"></li>
+                </ul>
+            </li>
+            <li>
+                <textarea class="meaning-text" name="meaning-text">{% for meaning in word.meanings %}{{meaning.text}}
+{% for example in meaning.examples %}    {{example}}
+{% endfor %}{% if not forloop.last %}
+{% endif %}{% endfor %}</textarea>
+            </li>
+            <li>
+                <div class="entry-footer">
+                    <ul class="horizontal">
+                        {% if word.exists %}
+                        <li><a href="#">生词已存在</a></li>
+                        {% else %}
+                        <li><a class="submit" href="#">提交</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+{% endblock %}

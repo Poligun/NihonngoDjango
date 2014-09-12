@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {% load staticfiles %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'nihonngo/css/framework.css' %}"> !-->
+    <link rel="stylesheet/less" type="text/css" href="{% static 'nihonngo/less/framework.less' %}">
+    <script type="text/javascript" src="{% static 'nihonngo/js/jquery-2.1.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihonngo/js/jquery.cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihonngo/js/jquery.json-2.4.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihonngo/js/less-1.7.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihonngo/js/framework.js' %}"></script>
+    {% block scripts %}{% endblock %}
+    <title>{% block title %}基本框架{% endblock %}</title>
+</head>
+<body>
+    {% block navbar %}
+    <div class="navbar">
+        <ul class="horizontal nav-left">
+            <li class="nav-item"><a href="{% url 'nihonngo:home' %}">主页</a></li>
+            <li class="nav-item"><a href="{% url 'nihonngo:exam' %}">测试</a></li>
+            <li class="nav-item"><a href="#">首选项</a></li>
+            <li class="nav-search-bar">
+                <url url="{% url 'nihonngo:words' 'search_string' %}"></url>
+                <input type="text" placeholder="搜索汉字或假名注音……">
+                <a href="#">搜索</a>
+            </li>
+        </ul>
+        {% if current_user %}
+        <ul class="horizontal nav-right">
+            <li class="nav-right-item"><a href="#">{{current_user.name}}</a></li>
+            <li class="nav-right-item"><a href="{% url 'nihonngo:signout' %}">登出</a></li>
+        </ul>
+        {% endif %}
+    </div>
+    {% endblock %}
+    {% block content %}
+    <div class="default-container">
+        <div class="default-container-header">
+            <ul class="horizontal">
+                <li><a href="#">编辑模式:お菓子</a></li>
+            </ul>
+        </div>
+        <ul class="vertical edit-entry">
+            <li>
+                <ul>
+                    <li class="title"><a href="#">假名</a></li>
+                    <li><input type="text" value="おかし"></li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class="title"><a href="#">词类</a></li>
+                    <li class="word-class-wrapper">
+                        <div>
+                            <div class="word-class"><a href="#">类别1</a>X</div>
+                            <input type="text">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'nihonngo/framework.html' %}
+
+{% block title %}生词{% endblock %}
+
+{% block content %}
+<div class="default-container">
+    <div class="default-container-header">
+        <ul class="horizontal">
+            <li><a href="{% url 'nihonngo:lookup_word' word %}">查询：{{word}}</a></li>
+        </ul>
+    </div>
+    <ul class="vertical">
+    {% if words %}
+        {% for word in words %}
+            <li class="word-entry">
+                <ul class="vertical">
+                    <li>
+                        <ul class="horizontal">
+                            <li>
+                                <ul class="vertical">
+                                    <li class="entry-kannji">{{word.kannji}}</li>
+                                    <li class="entry-kana">{{word.kana}}</li>
+                                </ul>
+                            </li>
+                            <li class="entry-word-classes">{{word.get_word_classes_display}}</li>
+                        </ul>
+                    </li>
+                    {% for meaning in word.meanings %}
+                        <li class="entry-meaning">{{forloop.counter}}. {{meaning.text}}</li>
+                        <li>
+                            <ul class="vertical">
+                            {% for example in meaning.examples %}
+                                <li class="entry-example">{{example.text}}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <div class="entry-footer">
+                            <ul class="horizontal">
+                                <li><a href="#">编辑</a></li>
+                                <li><a href="#">删除</a></li>
+                                <li><a href="#">隐藏</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+{% endblock %}

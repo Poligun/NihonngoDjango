@@ -1,0 +1,37 @@
+{% extends 'nihonngo/framework.html' %}
+
+{% block title %}请先登录{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'nihonngo/js/jquery.md5.js' %}"></script>
+<script type="text/javascript" src="{% static 'nihonngo/js/auth.js' %}"></script>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-container-header">
+        <ul class="horizontal">
+            <li><a href="#">请先登录</a></li>
+        </ul>
+    </div>
+    <form action="{% url 'nihonngo:signin' %}" method="POST" id='signInForm'>
+    {% csrf_token %}
+    <ul class="vertical auth-form">
+        <li><div class="message-div"></div></li>
+        <li><input type="text" name="name" placeholder="用户名"></li>
+        <li><input type="password" name="password" placeholder="密码"></li>
+        <li>
+            <ul class="horizontal">
+                <li><input type="checkbox" name="remember"></li>
+                <li>记住我</li>
+            </ul>
+        </li>
+        <li><a href="#">登录</a></li>
+        </form>
+    </ul>
+</div>
+{% endblock %}
